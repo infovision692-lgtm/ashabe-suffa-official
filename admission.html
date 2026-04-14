@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داخلہ فارم - جامعہ اصحابِ صفہ</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admission.css">
+</head>
+<body class="bg-dark-green">
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="form-card shadow-lg border-0">
+                <header class="form-header text-center">
+                    <h1 class="fw-bold">جامعہ اصحابِ صفہ</h1>
+                    <p class="mb-0 text-gold-light">آن لائن داخلہ فارم برائے تعلیمی سال 2026</p>
+                </header>
+
+                <div class="form-body p-4 p-md-5">
+                    <form action="https://formspree.io/f/xdaprlyq" method="POST">
+                        
+                        <h3 class="section-label mb-4"><i class="bi bi-person-fill me-2"></i>ذاتی معلومات</h3>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">طالب علم کا نام:</label>
+                                <input type="text" name="Full_Name" class="form-control custom-input" placeholder="مکمل نام" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">والد کا نام:</label>
+                                <input type="text" name="Father_Name" class="form-control custom-input" placeholder="والد کا نام" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">سرپرست کا نام (والد کی غیر موجودگی میں):</label>
+                            <input type="text" name="Guardian_Name" class="form-control custom-input">
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">تاریخِ پیدائش:</label>
+                                <input type="date" name="DOB" class="form-control custom-input" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">شناختی کارڈ / ب فارم:</label>
+                                <input type="text" name="CNIC" class="form-control custom-input" placeholder="00000-0000000-0">
+                            </div>
+                        </div>
+
+                        <h3 class="section-label my-4">تعلیمی و رابطہ تفصیلات</h3>
+
+                        <div class="row g-3">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">مطلوبہ درجہ:</label>
+                                <select name="Class" class="form-select custom-input" required>
+                                    <option value="" selected disabled>درجہ منتخب کریں...</option>
+                                    <option value="Hifz">حفظِ قرآن</option>
+                                    <option value="Ula">اولیٰ</option>
+                                    <option value="Sania">ثانیہ</option>
+                                    <option value="Salisa">ثالثہ</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">موبائل نمبر:</label>
+                                <input type="tel" name="WhatsApp_Number" class="form-control custom-input" placeholder="03XXXXXXXXX" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">مکمل گھر کا پتہ:</label>
+                            <textarea name="Address" class="form-control custom-input" rows="3" placeholder="گلی نمبر، شہر، تحصیل، ضلع"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">دستاویزات کا لنک (Google Drive):</label>
+                            <input type="url" name="Docs_Link" class="form-control custom-input" placeholder="https://drive.google.com/...">
+                            <small class="text-muted">تمام اسناد کا ایک فولڈر بنا کر یہاں لنک دیں</small>
+                        </div>
+
+                        <button type="submit" class="btn submit-button w-100 py-3 mt-3 shadow">درخواست جمع کروائیں</button>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="index.html" class="text-white text-decoration-none">← واپس ہوم پیج پر جائیں</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

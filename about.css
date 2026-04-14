@@ -1,0 +1,105 @@
+:root {
+    --emerald: #004d40;
+    --dark: #001a14;
+    --gold: #d4af37;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Nastaliq Urdu', 'Plus Jakarta Sans', sans-serif;
+    background: radial-gradient(circle at bottom right, var(--emerald), var(--dark));
+    color: var(--white);
+    min-height: 100vh;
+    direction: rtl;
+    line-height: 1.8;
+}
+
+/* نیو بار */
+.custom-navbar {
+    background: rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo { 
+    font-weight: 800; 
+    font-size: 1.6rem; 
+    color: var(--white) !important;
+}
+.gold { color: var(--gold) !important; }
+
+.nav-link {
+    color: var(--white) !important;
+    font-weight: 600;
+    margin: 0 10px;
+    transition: 0.3s;
+}
+
+.nav-link:hover, .nav-link.active { color: var(--gold) !important; }
+
+.nav-btn {
+    background: var(--gold);
+    color: var(--dark) !important;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+.nav-btn:hover {
+    background: var(--white);
+    color: var(--dark) !important;
+}
+
+/* تصویر کا باکس */
+.image-box {
+    position: relative;
+    border: 2px solid var(--gold);
+    border-radius: 30px;
+}
+
+.experience-badge {
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    background: var(--gold);
+    color: var(--dark);
+    padding: 15px 25px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+/* ٹیکسٹ سیکشن */
+.subtitle {
+    color: var(--gold);
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.gold-text { color: var(--gold); }
+.text-gold { color: var(--gold); }
+
+.border-gold {
+    border-color: var(--gold) !important;
+}
+
+/* موبائل کے لیے خاص سیٹنگز */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: var(--dark);
+        padding: 20px;
+        border-radius: 20px;
+        margin-top: 15px;
+        text-align: center;
+    }
+    .about-text {
+        text-align: center !important;
+    }
+    .image-box {
+        margin-top: 30px;
+    }
+}

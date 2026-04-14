@@ -1,0 +1,110 @@
+:root {
+    --emerald: #004d40;
+    --dark: #001a14;
+    --gold: #d4af37;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Nastaliq Urdu', 'Plus Jakarta Sans', sans-serif;
+    background: radial-gradient(circle at top, var(--emerald), var(--dark));
+    color: var(--white);
+    min-height: 100vh;
+    direction: rtl;
+    line-height: 1.8;
+}
+
+/* نیو بار */
+.custom-navbar {
+    background: rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo { 
+    font-weight: 800; 
+    font-size: 1.6rem; 
+    color: white !important;
+}
+.gold { color: var(--gold) !important; }
+
+.nav-link {
+    color: white !important;
+    font-weight: 600;
+    margin: 0 10px;
+}
+
+.nav-link.active, .nav-link:hover {
+    color: var(--gold) !important;
+}
+
+.nav-btn {
+    background: var(--gold);
+    color: var(--dark) !important;
+    border-radius: 50px;
+    font-weight: 800;
+}
+
+/* ہیڈر */
+.tagline { color: var(--gold); font-weight: bold; font-size: 1rem; }
+.gold-text { color: var(--gold); }
+
+/* پروگرام کارڈز */
+.program-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    text-align: center;
+    transition: 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.program-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.card-icon { font-size: 3rem; margin-bottom: 20px; }
+.program-card h3 { color: var(--gold); margin-bottom: 15px; font-size: 1.5rem; }
+.program-card p { opacity: 0.8; font-size: 1.1rem; margin-bottom: 25px; }
+
+.shift-tag {
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 4px 15px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.btn-outline-gold {
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-outline-gold:hover {
+    background-color: var(--gold);
+    color: var(--dark);
+}
+
+/* موبائل کے لیے سیٹنگز */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: var(--dark);
+        padding: 20px;
+        border-radius: 20px;
+        margin-top: 10px;
+    }
+}

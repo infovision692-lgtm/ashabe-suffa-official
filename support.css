@@ -1,0 +1,143 @@
+:root {
+    --emerald: #004d40;
+    --deep: #001a14;
+    --gold: #d4af37;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Noto Nastaliq Urdu', serif;
+    background-color: var(--deep);
+    color: var(--white);
+    min-height: 100vh;
+    direction: rtl;
+}
+
+.orb {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 77, 64, 0.3) 0%, transparent 70%);
+    top: -200px;
+    right: -200px;
+    z-index: -1;
+    filter: blur(100px);
+}
+
+/* نیو بار ڈیزائن */
+.custom-navbar .navbar-brand {
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: white !important;
+}
+
+.gold { color: var(--gold) !important; }
+
+.nav-link {
+    color: white !important;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-link.active {
+    color: var(--gold) !important;
+    border-bottom: 2px solid var(--gold);
+}
+
+/* ٹیکسٹ سائیڈ */
+.urdu-heading {
+    line-height: 1.8 !important;
+}
+
+.badge {
+    background: rgba(212, 175, 55, 0.1) !important;
+    color: var(--gold) !important;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.gold-text { color: var(--gold); }
+
+.trust-item {
+    font-weight: bold;
+    color: var(--gold);
+}
+
+/* پیمنٹ کارڈ (Glassmorphism) */
+.payment-card {
+    max-width: 450px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%);
+    backdrop-filter: blur(25px);
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: transform 0.3s ease;
+}
+
+.payment-card:hover {
+    transform: translateY(-10px);
+}
+
+.card-inner {
+    direction: ltr; /* کارڈ کے اندر نمبرز وغیرہ کے لیے */
+}
+
+.jazz-type { 
+    color: #ff4d4d; 
+    font-weight: 900; 
+    font-family: 'Plus Jakarta Sans'; 
+    letter-spacing: 1px;
+}
+
+label { 
+    font-size: 0.85rem; 
+    color: var(--gold); 
+    opacity: 0.8; 
+    display: block; 
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.number-display { 
+    font-family: 'Plus Jakarta Sans'; 
+    font-size: 2.3rem; 
+    font-weight: 800; 
+    text-align: left;
+    color: white;
+}
+
+.name-display { 
+    font-size: 1.5rem; 
+    font-weight: 600; 
+    font-family: 'Noto Nastaliq Urdu'; 
+    text-align: right; 
+    direction: rtl;
+}
+
+.card-footer-box { 
+    border-top: 1px solid rgba(255,255,255,0.1); 
+    text-align: right; 
+    direction: rtl;
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+.text-gold { color: var(--gold); }
+
+/* موبائل کے لیے */
+@media (max-width: 991.98px) {
+    .text-side {
+        text-align: center;
+    }
+    
+    .trust-icons {
+        justify-content: center;
+    }
+    .display-3 {
+        font-size: 2.5rem;
+    }
+    .navbar-collapse {
+        background: rgba(0,0,0,0.8);
+        padding: 20px;
+        border-radius: 20px;
+        margin-top: 15px;
+    }
+}

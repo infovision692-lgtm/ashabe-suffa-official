@@ -1,0 +1,81 @@
+:root {
+    --primary-green: #1a472a;
+    --dark-green: #0d1f14;
+    --gold: #c9a227;
+    --light-bg: #f8fcf9;
+}
+
+body {
+    font-family: 'Noto Nastaliq Urdu', 'Segoe UI', serif;
+    background: radial-gradient(circle, var(--primary-green) 0%, var(--dark-green) 100%);
+    min-height: 100vh;
+    direction: rtl;
+    line-height: 1.6;
+}
+
+.form-card {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.form-header {
+    background-color: #111;
+    color: var(--gold);
+    padding: 40px 20px;
+    border-bottom: 5px solid var(--gold);
+}
+
+.text-gold-light {
+    color: rgba(201, 162, 39, 0.8);
+}
+
+.section-label {
+    background: #f0f7f1;
+    color: var(--primary-green);
+    padding: 12px 15px;
+    border-right: 6px solid var(--gold);
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 0 5px 5px 0;
+}
+
+.custom-input {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 12px 15px;
+    background-color: #fdfdfd;
+    transition: all 0.3s ease;
+}
+
+.custom-input:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 0.25rem rgba(26, 71, 42, 0.1);
+    background-color: #fff;
+}
+
+.submit-button {
+    background: linear-gradient(135deg, var(--primary-green), #2a5e3a);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    transition: 0.4s ease;
+}
+
+.submit-button:hover {
+    filter: brightness(1.2);
+    transform: translateY(-3px);
+    color: var(--gold);
+}
+
+/* موبائل کے لیے سیٹنگز */
+@media (max-width: 768px) {
+    .form-header h1 {
+        font-size: 1.8rem;
+    }
+    .form-body {
+        padding: 25px 15px !important;
+    }
+}

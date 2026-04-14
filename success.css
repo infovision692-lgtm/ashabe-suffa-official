@@ -1,0 +1,106 @@
+:root {
+    --emerald: #004d40;
+    --dark: #001a14;
+    --gold: #d4af37;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Noto Nastaliq Urdu', serif;
+    background: radial-gradient(circle at top right, var(--emerald), var(--dark));
+    min-height: 100vh;
+    direction: rtl;
+    overflow-x: hidden;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.success-icon {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+.check {
+    font-size: 50px;
+    color: var(--dark);
+    font-weight: bold;
+    z-index: 2;
+}
+
+/* پلس اینیمیشن */
+.pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.5;
+    animation: pulse-ring 2.5s infinite;
+}
+
+h1 {
+    color: var(--gold);
+}
+
+.urdu-text {
+    line-height: 2.2;
+    color: var(--white);
+}
+
+.sub-text {
+    color: var(--white);
+    font-size: 1.1rem;
+}
+
+.divider {
+    height: 1px;
+    background: linear-gradient(to left, transparent, var(--gold), transparent);
+    opacity: 0.2;
+}
+
+.home-btn {
+    background: var(--gold);
+    color: var(--dark);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.home-btn:hover {
+    background: #f1c40f;
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+    color: var(--dark);
+}
+
+/* اینیمیشنز */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* موبائل کے لیے خاص سیٹنگ */
+@media (max-width: 576px) {
+    .glass-card {
+        padding: 40px 20px !important;
+        margin: 15px;
+    }
+    h1 { font-size: 1.8rem; }
+    .urdu-text { font-size: 1.2rem; }
+}
