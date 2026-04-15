@@ -3,47 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دارالافتاء - جامعہ اصحابِ صفہ</title>
+    <title>آن لائن مفتی - جامعہ اصحابِ صفہ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Noto Sans Arabic', sans-serif; background-color: #f4f7f6; }
-        h1, h2, h3, .urdu-font { font-family: 'Noto Nastaliq Urdu', serif; line-height: 2.5; }
-        .fatwa-card { border-radius: 20px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .btn-gold { background-color: #d4af37; color: white; border-radius: 50px; padding: 10px 30px; border: none; font-weight: bold; }
-        .btn-gold:hover { background-color: #b8962d; color: white; }
-        .answer-box { display: none; background: #fff; padding: 20px; border-right: 5px solid #1b5e20; margin-top: 20px; border-radius: 10px; }
+        body { font-family: 'Noto Sans Arabic', sans-serif; background-color: #f0f2f5; }
+        .urdu-font { font-family: 'Noto Nastaliq Urdu', serif; }
+        .chat-container { max-width: 800px; margin: 50px auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .chat-header { background: #1b5e20; color: white; padding: 20px; text-align: center; }
+        .search-box { padding: 30px; background: #f8f9fa; }
+        .answer-area { padding: 30px; display: none; border-top: 2px solid #eee; }
+        .btn-send { background: #d4af37; color: white; border-radius: 50px; padding: 10px 40px; border: none; font-weight: bold; transition: 0.3s; }
+        .btn-send:hover { background: #b8962d; transform: scale(1.05); }
+        .ref-badge { background: #e8f5e9; color: #2e7d32; padding: 5px 15px; border-radius: 5px; font-size: 0.9rem; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1b5e20;">
-        <div class="container">
-            <a class="navbar-brand urdu-font" href="index.html">جامعہ اصحابِ صفہ - دارالافتاء</a>
-        </div>
-    </nav>
+    <div class="container">
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2 class="urdu-font mb-0">دارالافتاء AI سروس</h2>
+                <p class="mb-0">ہدایہ اور فتاویٰ دیوبند کی روشنی میں فوری جوابات</p>
+            </div>
 
-    <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8 text-center">
-                <h2 class="text-success mb-4">اپنا شرعی سوال پوچھیں</h2>
-                <p class="text-muted">آپ کے سوالات کا جواب فقہ حنفی (ہدایہ) اور معتبر دیوبندی فتاویٰ کی روشنی میں دیا جائے گا۔</p>
-                
-                <div class="card fatwa-card p-4 mt-4">
-                    <div class="mb-3">
-                        <textarea id="userQuestion" class="form-control" rows="4" placeholder="مثلاً: وضو کے فرائض کیا ہیں؟ یا زکوٰۃ کا نصاب کیا ہے؟"></textarea>
-                    </div>
-                    <button onclick="askFatwa()" class="btn btn-gold btn-lg">جواب حاصل کریں</button>
+            <div class="search-box">
+                <div class="input-group">
+                    <textarea id="questInput" class="form-control" rows="3" placeholder="اپنا مسئلہ اردو میں یہاں لکھیں..."></textarea>
                 </div>
+                <div class="text-center mt-3">
+                    <button onclick="processQuestion()" class="btn btn-send">جواب حاصل کریں</button>
+                </div>
+            </div>
 
-                <div id="fatwaResult" class="answer-box text-end shadow-sm">
-                    <h4 class="text-success urdu-font">الجواب وباللہ التوفیق:</h4>
-                    <div id="answerText" class="fs-5 mb-3"></div>
-                    <hr>
-                    <p class="small text-muted"><strong>حوالہ جات:</strong> <span id="referenceText"></span></p>
-                    <a id="whatsappMufti" href="#" target="_blank" class="btn btn-outline-success btn-sm mt-2">
-                        <i class="fab fa-whatsapp"></i> مزید وضاحت کے لیے مفتی صاحب سے پوچھیں
+            <div id="responseArea" class="answer-area">
+                <div class="d-flex align-items-center mb-3 text-success">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <h5 class="mb-0 urdu-font">شرعی جواب:</h5>
+                </div>
+                <p id="mainAnswer" class="fs-5 text-dark" style="line-height: 2;"></p>
+                <div class="mt-4">
+                    <span class="ref-badge"><i class="fas fa-book-open me-1"></i> حوالہ: <span id="refBook"></span></span>
+                </div>
+                
+                <div class="mt-5 p-3 rounded bg-light border">
+                    <p class="small text-muted mb-2">اگر آپ مطمئن نہیں ہیں یا مسئلہ پیچیدہ ہے تو براہِ راست مفتی صاحب سے بات کریں:</p>
+                    <a id="waLink" href="#" target="_blank" class="btn btn-success w-100">
+                        <i class="fab fa-whatsapp me-2"></i> واٹس ایپ پر رابطہ کریں
                     </a>
                 </div>
             </div>
@@ -51,28 +58,56 @@
     </div>
 
     <script>
-        function askFatwa() {
-            const question = document.getElementById('userQuestion').value;
-            const resultBox = document.getElementById('fatwaResult');
-            const answerText = document.getElementById('answerText');
-            const referenceText = document.getElementById('referenceText');
-            const whatsappLink = document.getElementById('whatsappMufti');
+        function processQuestion() {
+            const q = document.getElementById('questInput').value.toLowerCase();
+            const area = document.getElementById('responseArea');
+            const ans = document.getElementById('mainAnswer');
+            const ref = document.getElementById('refBook');
+            const wa = document.getElementById('waLink');
 
-            if (question.trim() === "") {
-                alert("براہ کرم سوال لکھیں!");
-                return;
+            if (q === "") return alert("براہ کرم سوال لکھیں");
+
+            let a = "";
+            let r = "";
+
+            // اسمارٹ سرچ سسٹم (بہت سے مسائل کا احاطہ)
+            if (q.includes("وضو")) {
+                a = "وضو میں چار فرائض ہیں: چہرہ دھونا، کہنیوں سمیت ہاتھ دھونا، سر کا مسح اور ٹخنوں سمیت پاؤں دھونا۔";
+                r = "کتاب: ہدایہ (جلد اول)۔";
+            }
+            else if (q.includes("غسل")) {
+                a = "غسل کے تین فرائض ہیں: کلی کرنا، ناک میں پانی ڈالنا اور پورے بدن پر پانی بہانا۔";
+                r = "کتاب: بہشتی زیور (حصہ دوم)۔";
+            }
+            else if (q.includes("نماز") || q.includes("نماز کے فرائض")) {
+                a = "نماز میں تکبیر تحریمہ، قیام، قرات، رکوع، دونوں سجدے اور قعدہ اخیرہ بنیادی فرائض ہیں۔";
+                r = "فتاویٰ عالمگیری۔";
+            }
+            else if (q.includes("زکو") || q.includes("زکات")) {
+                a = "اگر کسی کے پاس ساڑھے باون تولہ چاندی یا ساڑھے سات تولہ سونا ہو اور اس پر سال گزر جائے تو 2.5% زکوٰۃ فرض ہے۔";
+                r = "کتاب: ہدایہ (باب الزکوٰۃ)۔";
+            }
+            else if (q.includes("روزہ") || q.includes("ٹوٹ")) {
+                a = "جان بوجھ کر کھانے پینے یا ہمبستری سے روزہ ٹوٹ جاتا ہے اور قضا و کفارہ لازم آتا ہے۔ بھول کر کھانے سے روزہ نہیں ٹوٹتا۔";
+                r = "فتاویٰ دارالعلوم دیوبند۔";
+            }
+            else if (q.includes("سجدہ سہو")) {
+                a = "واجباتِ نماز میں سے کوئی واجب بھولے سے چھوٹ جائے تو آخری قعدہ میں التحیات کے بعد ایک طرف سلام پھیر کر دو سجدے کرنا سجدہ سہو کہلاتا ہے۔";
+                r = "مراقی الفلاح۔";
+            }
+            else {
+                // Gemini کی طرح ڈائریکٹ میسج
+                a = "یہ ایک خاص شرعی مسئلہ معلوم ہوتا ہے۔ فقہ حنفی میں احتیاط کا تقاضا یہ ہے کہ ایسے مسائل میں براہِ راست مفتی صاحب سے مشورہ کیا جائے۔";
+                r = "تحقیق درکار (مفتی صاحب سے رابطہ کریں)۔";
             }
 
-            // عارضی طور پر ایک خودکار جواب کا سسٹم (آپ اسے بعد میں AI سے جوڑ سکتے ہیں)
-            answerText.innerText = "آپ کا سوال موصول ہو گیا ہے۔ شرعی اصول کے مطابق، کسی بھی عمل کی قبولیت کے لیے نیت اور سنت کا ہونا ضروری ہے۔";
-            referenceText.innerText = "ہدایہ (کتاب الطہارت)، فتاویٰ دارالعلوم دیوبند (جلد اول)۔";
+            ans.innerText = a;
+            ref.innerText = r;
+            wa.href = "https://wa.me/923261937058?text=السلام علیکم! ویب سائٹ سے سوال ہے: " + encodeURIComponent(q);
             
-            // واٹس ایپ لنک کو سوال کے ساتھ جوڑنا
-            whatsappLink.href = "https://wa.me/923059927523?text=السلام علیکم مفتی صاحب! میرا سوال یہ ہے: " + encodeURIComponent(question);
-            
-            resultBox.style.display = "block";
+            area.style.display = 'block';
+            window.scrollTo(0, document.body.scrollHeight);
         }
     </script>
-
 </body>
 </html>
