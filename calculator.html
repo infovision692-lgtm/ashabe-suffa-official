@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرعی کیلکولیٹرز - جامعہ اصحابِ صفہ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #1b5e20; --gold: #d4af37; --light-bg: #f8faf8; }
+        body { background: var(--light-bg); font-family: 'Noto Sans Arabic', sans-serif; }
+        .urdu-font { font-family: 'Noto Nastaliq Urdu', serif; }
+        .navbar { background: var(--primary) !important; border-bottom: 4px solid var(--gold); }
+        
+        .main-card { border: none; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); background: white; height: 100%; }
+        .card-header-custom { background: var(--primary); color: white; padding: 25px; text-align: center; border-radius: 25px 25px 0 0; border-bottom: 5px solid var(--gold); }
+        
+        .input-group-text { background: #e8f5e9; border: none; color: var(--primary); font-weight: bold; }
+        .form-control { border: 1px solid #ddd; padding: 12px; }
+        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 0.2rem rgba(27, 94, 32, 0.25); }
+
+        .result-panel { display: none; background: #fff; border: 2px solid var(--primary); border-radius: 20px; padding: 25px; margin-top: 25px; animation: fadeIn 0.5s; }
+        .share-item { border-bottom: 1px solid #eee; padding: 10px 0; display: flex; justify-content: space-between; align-items: center; }
+        .share-item:last-child { border: none; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .btn-action { background: var(--primary); color: white; border-radius: 50px; padding: 15px; border: none; font-weight: bold; width: 100%; transition: 0.3s; }
+        .btn-action:hover { background: #0d3b10; transform: scale(1.02); color: white; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand urdu-font fs-2" href="index.html">اصحابِ صفہ</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto text-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">ہوم پیج</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">تعارف</a></li>
+                    <li class="nav-item"><a class="nav-link" href="programs.html">پروگرامز</a></li>
+                    <li class="nav-item"><a class="nav-link" href="fatwa.html" style="color: #d4af37; font-weight: bold;">دارالافتاء</a></li>
+                     <a class="nav-link" href="daily-masail.html">آج کا سبق</a>
+</li>
+<li class="nav-item">
+                    <li class="nav-item"><a class="nav-link active" href="calculators.html">کیلکولیٹرز</a></li>
+                       <li class="nav-item mt-2 mt-lg-0"><a class="nav-link nav-btn px-4" href="support.html">تعاون کریں</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <h1 class="urdu-font text-center mb-5 display-4">شرعی وراثت و زکوٰۃ پورٹل</h1>
+
+        <div class="row g-5">
+            <div class="col-lg-7">
+                <div class="main-card">
+                    <div class="card-header-custom">
+                        <h2 class="urdu-font mb-0"><i class="fas fa-users-rectangle me-2"></i> مکمل میراث کیلکولیٹر</h2>
+                    </div>
+                    <div class="card-body p-4 p-md-5">
+                        <div class="mb-4">
+                            <label class="form-label urdu-font fs-4 text-success">میت کا کل ترکہ (روپے)</label>
+                            <input type="number" id="m_wealth" class="form-control form-control-lg rounded-4 shadow-sm" placeholder="کل رقم درج کریں">
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">شوہر / بیوی</label>
+                                <select id="m_spouse" class="form-select rounded-pill">
+                                    <option value="none">کوئی نہیں</option>
+                                    <option value="husband">شوہر</option>
+                                    <option value="wife">بیوی (ایک یا زیادہ)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">والدین</label>
+                                <div class="d-flex gap-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="m_father"> <label>والد</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="m_mother"> <label>والدہ</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-6 col-md-3 text-center">
+                                <label class="form-label">بیٹے</label>
+                                <input type="number" id="m_sons" class="form-control rounded-pill text-center" value="0" min="0">
+                            </div>
+                            <div class="col-6 col-md-3 text-center">
+                                <label class="form-label">بیٹیاں</label>
+                                <input type="number" id="m_daughters" class="form-control rounded-pill text-center" value="0" min="0">
+                            </div>
+                            <div class="col-6 col-md-3 text-center">
+                                <label class="form-label">بھائی</label>
+                                <input type="number" id="m_brothers" class="form-control rounded-pill text-center" value="0" min="0">
+                            </div>
+                            <div class="col-6 col-md-3 text-center">
+                                <label class="form-label">بہنیں</label>
+                                <input type="number" id="m_sisters" class="form-control rounded-pill text-center" value="0" min="0">
+                            </div>
+                        </div>
+
+                        <button onclick="calculateInheritance()" class="btn-action mt-5 urdu-font fs-4">شرعی تقسیم نکالیں</button>
+
+                        <div id="m_result" class="result-panel mt-4 shadow-lg border-success">
+                            <h3 class="urdu-font text-center text-success border-bottom pb-3 mb-4">تفصیلی تقسیمِ ترکہ</h3>
+                            <div id="m_details"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="main-card">
+                    <div class="card-header-custom" style="background: #2e7d32;">
+                        <h2 class="urdu-font mb-0"><i class="fas fa-hand-holding-heart me-2"></i> زکوٰۃ کیلکولیٹر</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">سونے چاندی کی مالیت</label>
+                            <input type="number" id="z_gold" class="form-control rounded-pill" placeholder="0">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">نقد رقم اور بینک بیلنس</label>
+                            <input type="number" id="z_cash" class="form-control rounded-pill" placeholder="0">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">مالِ تجارت کی قیمت</label>
+                            <input type="number" id="z_trade" class="form-control rounded-pill" placeholder="0">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label small text-danger">واجب الادا قرض (منہا کریں)</label>
+                            <input type="number" id="z_debt" class="form-control rounded-pill border-danger" placeholder="0">
+                        </div>
+                        <button onclick="calculateZakat()" class="btn-action" style="background: #2e7d32;">حساب لگائیں</button>
+
+                        <div id="z_result" class="result-panel text-center">
+                            <h4 class="urdu-font">واجب الادا زکوٰۃ:</h4>
+                            <h2 id="z_final" class="text-success fw-bold"></h2>
+                            <p class="small text-muted">نوٹ: زکوٰۃ کل مال کا 2.5% بنتی ہے۔</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateInheritance() {
+            let wealth = parseFloat(document.getElementById('m_wealth').value) || 0;
+            let sons = parseInt(document.getElementById('m_sons').value) || 0;
+            let daughters = parseInt(document.getElementById('m_daughters').value) || 0;
+            let spouse = document.getElementById('m_spouse').value;
+            let father = document.getElementById('m_father').checked;
+            let mother = document.getElementById('m_mother').checked;
+            let brothers = parseInt(document.getElementById('m_brothers').value) || 0;
+            let sisters = parseInt(document.getElementById('m_sisters').value) || 0;
+
+            let remaining = wealth;
+            let shares = [];
+
+            // 1. ذوی الفروض (Fixed Shares)
+            // شوہر یا بیوی
+            if(spouse === 'husband') {
+                let share = (sons > 0 || daughters > 0) ? (wealth / 4) : (wealth / 2);
+                remaining -= share;
+                shares.push({ name: "شوہر", amount: share, note: (sons > 0 || daughters > 0) ? "1/4" : "1/2" });
+            } else if(spouse === 'wife') {
+                let share = (sons > 0 || daughters > 0) ? (wealth / 8) : (wealth / 4);
+                remaining -= share;
+                shares.push({ name: "بیوی (تمام)", amount: share, note: (sons > 0 || daughters > 0) ? "1/8" : "1/4" });
+            }
+
+            // والدہ
+            if(mother) {
+                let share = (sons > 0 || daughters > 0 || (brothers + sisters) >= 2) ? (wealth / 6) : (wealth / 3);
+                remaining -= share;
+                shares.push({ name: "والدہ", amount: share, note: (sons > 0 || daughters > 0) ? "1/6" : "1/3" });
+            }
+
+            // والد
+            if(father) {
+                let share = (sons > 0 || daughters > 0) ? (wealth / 6) : 0;
+                if(share > 0) {
+                    remaining -= share;
+                    shares.push({ name: "والد", amount: share, note: "1/6" });
+                }
+            }
+
+            // 2. عصبات (Residuaries)
+            if(sons > 0 || daughters > 0) {
+                // اگر اولاد ہو تو بھائی بہن کو کچھ نہیں ملتا (حجب)
+                let totalParts = (sons * 2) + daughters;
+                let perPart = remaining / totalParts;
+                if(sons > 0) shares.push({ name: `بیٹے (${sons})`, amount: perPart * 2 * sons, note: "عصبہ (2:1)" });
+                if(daughters > 0) shares.push({ name: `بیٹیاں (${daughters})`, amount: perPart * daughters, note: "عصبہ (2:1)" });
+                remaining = 0;
+            } else if(father) {
+                // اگر اولاد نہ ہو تو والد عصبہ بن جاتا ہے
+                shares.push({ name: "والد (عصبہ)", amount: remaining, note: "بقیہ تمام" });
+                remaining = 0;
+            } else if(brothers > 0 || sisters > 0) {
+                // اگر اولاد اور والد نہ ہوں تو بھائی بہن عصبہ بنیں گے
+                let totalParts = (brothers * 2) + sisters;
+                let perPart = remaining / totalParts;
+                if(brothers > 0) shares.push({ name: `بھائی (${brothers})`, amount: perPart * 2 * brothers, note: "عصبہ (2:1)" });
+                if(sisters > 0) shares.push({ name: `بہنیں (${sisters})`, amount: perPart * sisters, note: "عصبہ (2:1)" });
+                remaining = 0;
+            }
+
+            // ڈسپلے رزلٹ
+            let html = "";
+            shares.forEach(s => {
+                html += `
+                <div class="share-item">
+                    <span class="fs-5 fw-bold text-primary">${s.name} <small class="text-muted">(${s.note})</small></span>
+                    <span class="fs-4 urdu-font">روپے ${Math.round(s.amount).toLocaleString()}</span>
+                </div>`;
+            });
+
+            if(remaining > 0) {
+                html += `<div class="alert alert-warning mt-3">بقیہ رقم (روپے ${Math.round(remaining).toLocaleString()}) بیت المال یا دور کے رشتہ داروں کے لیے۔</div>`;
+            }
+
+            document.getElementById('m_details').innerHTML = html;
+            document.getElementById('m_result').style.display = 'block';
+            window.scrollTo({ top: document.getElementById('m_result').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        function calculateZakat() {
+            let gold = parseFloat(document.getElementById('z_gold').value) || 0;
+            let cash = parseFloat(document.getElementById('z_cash').value) || 0;
+            let trade = parseFloat(document.getElementById('z_trade').value) || 0;
+            let debt = parseFloat(document.getElementById('z_debt').value) || 0;
+            let net = (gold + cash + trade) - debt;
+            let zakat = net > 0 ? (net * 0.025) : 0;
+            document.getElementById('z_final').innerText = "روپے " + Math.round(zakat).toLocaleString();
+            document.getElementById('z_result').style.display = 'block';
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
