@@ -17,7 +17,7 @@
         .nav-link:hover { color: #d4af37 !important; }
         .active-link { color: #d4af37 !important; border-bottom: 2px solid #d4af37; }
 
-        .hero-section { background: linear-gradient(135deg, #1b5e20 0%, #0d3b10 100%); color: white; padding: 60px 0; border-bottom: 5px solid #d4af37; }
+        .hero-section { background: linear-gradient(135deg, #1b5e20 0%, #0d3b10 100%); color: white; padding: 70px 0; border-bottom: 5px solid #d4af37; }
         .search-wrapper { margin-top: -40px; }
         .main-card { border: none; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
         .ans-box { display: none; background: white; border-right: 10px solid #1b5e20; border-radius: 15px; padding: 35px; margin-top: 30px; }
@@ -36,7 +36,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow">
         <div class="container">
             <a class="navbar-brand urdu-font fs-3" href="index.html">اصحابِ صفہ</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-content="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -54,7 +54,7 @@
     <section class="hero-section text-center">
         <div class="container px-4">
             <h1 class="urdu-font mb-3 display-4">مرکزی دارالافتاء و تحقیق</h1>
-            <p class="fs-4">مستند کتبِ فقہ اور فتاویٰ دیوبند کا جامع انسائیکلوپیڈیا</p>
+            <p class="fs-4">مستند کتبِ فقہ (ہدایہ، عالمگیری، شامی) اور فتاویٰ دیوبند کا جامع انسائیکلوپیڈیا</p>
         </div>
     </section>
 
@@ -63,7 +63,7 @@
             <div class="col-md-11 col-lg-9">
                 <div class="card main-card p-4">
                     <div class="input-group input-group-lg">
-                        <input type="text" id="userInput" class="form-control border-0 bg-light" placeholder="مسئلہ یہاں لکھیں (مثلاً: وضو، نماز، زکوٰۃ...)">
+                        <input type="text" id="userInput" class="form-control border-0 bg-light" placeholder="مسئلہ یہاں لکھیں (مثلاً: وضو، نماز، زکوٰۃ، میراث...)">
                         <button onclick="masterSearch()" class="btn btn-gold px-4">تلاش کریں</button>
                     </div>
                 </div>
@@ -76,10 +76,10 @@
                     <p id="ansDisplay" class="fs-4 text-dark" style="line-height: 2.2; text-align: justify;"></p>
                     <hr>
                     <div class="alert alert-secondary mb-4 small">
-                        <i class="fas fa-exclamation-triangle me-2"></i> یہ جواب خودکار ہے، حتمی رائے کے لیے مفتی صاحب سے رابطہ کریں۔
+                        <i class="fas fa-exclamation-triangle me-2"></i> یہ جواب خودکار ہے، حتمی رائے کے لیے مفتی صاحب سے براہِ راست رابطہ مستحسن ہے۔
                     </div>
                     <a id="waMufti" href="#" target="_blank" class="btn btn-success btn-lg w-100 rounded-pill shadow-sm">
-                        <i class="fab fa-whatsapp me-2"></i> مفتی صاحب سے رابطہ کریں
+                        <i class="fab fa-whatsapp me-2"></i> مفتی صاحب سے براہِ راست رابطہ کریں
                     </a>
                 </div>
             </div>
@@ -92,16 +92,16 @@
         const megaLibrary = [
             { tags: ["وضو", "فرض", "ٹوٹنا"], ans: "وضو میں 4 فرائض ہیں: چہرہ، دونوں ہاتھ کہنیوں سمیت دھونا، چوتھائی سر کا مسح اور دونوں پاؤں ٹخنوں سمیت دھونا۔ ہوا نکلنے، خون بہنے یا گہری نیند سے وضو ٹوٹ جاتا ہے۔", ref: "ہدایہ: کتاب الطہارت" },
             { tags: ["غسل", "جنابت", "حیض"], ans: "غسل میں 3 فرائض ہیں: کلی کرنا، ناک میں پانی ڈالنا اور پورے جسم پر پانی بہانا۔", ref: "فتاویٰ عالمگیری" },
-            { tags: ["نماز", "قصر", "سفر"], ans: "78 کلومیٹر کے سفر پر 4 رکعت والی فرض نماز کو 2 پڑھنا (قصر) واجب ہے۔", ref: "ہدایہ: صلاۃ المسافر" },
+            { tags: ["نماز", "قصر", "سفر"], ans: "78 کلومیٹر کے سفر پر 4 رکعت والی فرض نماز کو 2 پڑھنا (قصر) واجب ہے۔ مسافر تب ہوگا جب اپنی بستی سے نکل جائے۔", ref: "ہدایہ: صلاۃ المسافر" },
             { tags: ["سجدہ سہو", "بھول"], ans: "واجب بھول جانے پر قعدہ اخیرہ میں التحیات کے بعد ایک طرف سلام پھیر کر دو سجدے کرنا سجدہ سہو ہے۔", ref: "مراقی الفلاح" },
             { tags: ["زکات", "زکوۃ", "مال"], ans: "ساڑھے باون تولہ چاندی یا ساڑھے سات تولہ سونے کی قیمت کے برابر مال پر سال گزرنے سے 2.5% زکوٰۃ واجب ہے۔", ref: "ہدایہ: کتاب الزکوٰۃ" },
-            { tags: ["روزہ", "کفارہ", "قضا"], ans: "جان بوجھ کر روزہ توڑنے پر قضا اور کفارہ لازم ہے۔ انجکشن سے روزہ نہیں ٹوٹتا بشرطیکہ وہ رگ یا پٹھے میں ہو۔", ref: "فتاویٰ دیوبند" },
-            { tags: ["حج", "عمرہ", "احرام", "طواف"], ans: "حج کے 3 فرائض ہیں: احرام، وقوفِ عرفہ اور طوافِ زیارت۔", ref: "ہدایہ: کتاب الحج" },
-            { tags: ["سود", "بینک", "نفع"], ans: "سود قطعی حرام ہے۔ بینک کا فکس نفع سودی ہونے کی وجہ سے ناجائز ہے۔", ref: "فتاویٰ عثمانی" },
-            { tags: ["نکاح", "گواہ", "شادی"], ans: "نکاح کے لیے دو مسلمان مرد گواہوں کی موجودگی میں ایجاب و قبول شرط ہے۔", ref: "ہدایہ: کتاب النکاح" },
-            { tags: ["طلاق", "عدت", "خلع"], ans: "طلاق ناپسندیدہ امر ہے مگر دینے سے واقع ہو جاتی ہے۔ تین طلاقیں دینے سے مغلظہ واقع ہو جاتی ہے۔", ref: "ہدایہ: کتاب الطلاق" },
-            { tags: ["وراثت", "میراث", "تقسیم"], ans: "میت کے ترکہ میں سب سے پہلے قرض کی ادائیگی، پھر وصیت اور پھر ورثاء میں شرعی حصوں کی تقسیم ہوگی۔", ref: "سراجی فی المیراث" },
-            { tags: ["تصویر", "ویڈیو"], ans: "ذی روح کی تصویر بنانا ناجائز ہے، تاہم پاسپورٹ یا شناختی کارڈ جیسے ضروری مقاصد کے لیے گنجائش ہے۔", ref: "فتاویٰ محمودیہ" }
+            { tags: ["روزہ", "کفارہ", "قضا"], ans: "جان بوجھ کر روزہ توڑنے پر قضا اور کفارہ (60 مسلسل روزے) لازم ہے۔ انجکشن سے روزہ نہیں ٹوٹتا بشرطیکہ وہ رگ یا پٹھے میں ہو۔", ref: "فتاویٰ دیوبند" },
+            { tags: ["حج", "عمرہ", "احرام", "طواف"], ans: "حج کے 3 فرائض ہیں: احرام، وقوفِ عرفہ اور طوافِ زیارت۔ عمرہ میں احرام، طواف اور سعی بنیادی ارکان ہیں۔", ref: "ہدایہ: کتاب الحج" },
+            { tags: ["سود", "بینک", "نفع"], ans: "سود قطعی حرام ہے۔ ہر وہ قرض جو نفع کھینچے سود ہے۔ بینک کا فکس نفع سودی ہونے کی وجہ سے ناجائز ہے۔", ref: "فتاویٰ عثمانی" },
+            { tags: ["نکاح", "گواہ", "ولایت"], ans: "نکاح کے لیے دو مسلمان مرد گواہوں کی موجودگی میں ایجاب و قبول شرط ہے۔", ref: "ہدایہ: کتاب النکاح" },
+            { tags: ["طلاق", "عدت", "خلع"], ans: "طلاق ایک ناپسندیدہ امر ہے۔ تین طلاقیں دینے سے مغلظہ واقع ہو جاتی ہے۔ عدت عام طور پر 3 حیض ہے۔", ref: "ہدایہ: کتاب الطلاق" },
+            { tags: ["وراثت", "میراث", "تقسیم"], ans: "میت کے ترکہ میں سب سے پہلے تجہیز و تکفین، پھر قرض کی ادائیگی، پھر وصیت (اگر ہو) اور پھر ورثاء میں تقسیم ہوگی۔", ref: "سراجی فی المیراث" },
+            { tags: ["تصویر", "ویڈیو", "ٹی وی"], ans: "ذی روح کی تصویر بنانا ناجائز ہے، تاہم پاسپورٹ، شناختی کارڈ یا تعلیمی مقاصد کے لیے گنجائش موجود ہے۔", ref: "فتاویٰ محمودیہ" }
         ];
 
         function masterSearch() {
@@ -119,7 +119,7 @@
                 ansField.innerText = match.ans;
                 refField.innerText = "حوالہ: " + match.ref;
             } else {
-                ansField.innerText = "آپ کا سوال موصول ہو گیا ہے۔ مستند جواب کے لیے نیچے موجود واٹس ایپ بٹن پر کلک کر کے مفتی صاحب سے رجوع کریں۔";
+                ansField.innerText = "آپ کا سوال موصول ہو گیا ہے۔ یہ ایک دقیق شرعی مسئلہ معلوم ہوتا ہے جس کی تفصیل کتبِ فتاویٰ میں دیکھنا ضروری ہے۔ مستند جواب کے لیے نیچے موجود واٹس ایپ بٹن پر کلک کریں۔";
                 refField.innerText = "تحقیق درکار";
             }
 
