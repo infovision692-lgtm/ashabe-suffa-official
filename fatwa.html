@@ -3,54 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آن لائن مفتی - جامعہ اصحابِ صفہ</title>
+    <title>جامع دارالافتاء - دارالعلوم اصحابِ صفہ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Noto Sans Arabic', sans-serif; background-color: #f0f2f5; }
+        body { font-family: 'Noto Sans Arabic', sans-serif; background-color: #f4f7f6; }
         .urdu-font { font-family: 'Noto Nastaliq Urdu', serif; }
-        .chat-container { max-width: 800px; margin: 50px auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-        .chat-header { background: #1b5e20; color: white; padding: 20px; text-align: center; }
-        .search-box { padding: 30px; background: #f8f9fa; }
-        .answer-area { padding: 30px; display: none; border-top: 2px solid #eee; }
-        .btn-send { background: #d4af37; color: white; border-radius: 50px; padding: 10px 40px; border: none; font-weight: bold; transition: 0.3s; }
-        .btn-send:hover { background: #b8962d; transform: scale(1.05); }
-        .ref-badge { background: #e8f5e9; color: #2e7d32; padding: 5px 15px; border-radius: 5px; font-size: 0.9rem; font-weight: bold; }
+        .hero-section { background: linear-gradient(135deg, #1b5e20 0%, #0d3b10 100%); color: white; padding: 70px 0; border-bottom: 5px solid #d4af37; }
+        .search-wrapper { margin-top: -40px; }
+        .main-card { border: none; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .ans-box { display: none; background: white; border-right: 10px solid #1b5e20; border-radius: 15px; padding: 35px; margin-top: 30px; }
+        .ref-pill { background: #e8f5e9; color: #1b5e20; padding: 6px 18px; border-radius: 50px; font-weight: bold; font-size: 0.9rem; border: 1px solid #c8e6c9; }
+        .btn-gold { background: #d4af37; color: #1b5e20; font-weight: bold; border: none; border-radius: 10px; transition: 0.3s; }
+        .btn-gold:hover { background: #c29d2f; transform: translateY(-2px); }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="chat-container">
-            <div class="chat-header">
-                <h2 class="urdu-font mb-0">دارالافتاء  سروس</h2>
-                <p class="mb-0">ہدایہ اور فتاویٰ دیوبند کی روشنی میں فوری جوابات</p>
-            </div>
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="urdu-font mb-3 display-4">مرکزی دارالافتاء و تحقیق</h1>
+            <p class="fs-4">مستند کتبِ فقہ (ہدایہ، عالمگیری، شامی) اور فتاویٰ دیوبند کا جامع انسائیکلوپیڈیا</p>
+        </div>
+    </section>
 
-            <div class="search-box">
-                <div class="input-group">
-                    <textarea id="questInput" class="form-control" rows="3" placeholder="اپنا مسئلہ اردو میں یہاں لکھیں..."></textarea>
+    <div class="container search-wrapper mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-11 col-lg-9">
+                <div class="card main-card p-4">
+                    <div class="input-group input-group-lg">
+                        <input type="text" id="userInput" class="form-control border-0 bg-light" placeholder="مسئلہ یہاں لکھیں (مثلاً: حج کا طریقہ، ڈیجیٹل کرنسی، میراث کے حصے، قصر نماز...)">
+                        <button onclick="masterSearch()" class="btn btn-gold px-5">تلاش کریں</button>
+                    </div>
                 </div>
-                <div class="text-center mt-3">
-                    <button onclick="processQuestion()" class="btn btn-send">جواب حاصل کریں</button>
-                </div>
-            </div>
 
-            <div id="responseArea" class="answer-area">
-                <div class="d-flex align-items-center mb-3 text-success">
-                    <i class="fas fa-check-circle me-2"></i>
-                    <h5 class="mb-0 urdu-font">شرعی جواب:</h5>
-                </div>
-                <p id="mainAnswer" class="fs-5 text-dark" style="line-height: 2;"></p>
-                <div class="mt-4">
-                    <span class="ref-badge"><i class="fas fa-book-open me-1"></i> حوالہ: <span id="refBook"></span></span>
-                </div>
-                
-                <div class="mt-5 p-3 rounded bg-light border">
-                    <p class="small text-muted mb-2">اگر آپ مطمئن نہیں ہیں یا مسئلہ پیچیدہ ہے تو براہِ راست مفتی صاحب سے بات کریں:</p>
-                    <a id="waLink" href="#" target="_blank" class="btn btn-success w-100">
-                        <i class="fab fa-whatsapp me-2"></i> واٹس ایپ پر رابطہ کریں
+                <div id="resultBox" class="ans-box shadow-lg">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="urdu-font text-success mb-0">شرعی رہنمائی:</h3>
+                        <span id="refDisplay" class="ref-pill"></span>
+                    </div>
+                    <p id="ansDisplay" class="fs-4 text-dark" style="line-height: 2.2; text-align: justify;"></p>
+                    <hr>
+                    <div class="alert alert-secondary mb-4">
+                        <small><i class="fas fa-exclamation-triangle me-2"></i> یہ جواب خودکار ہے، فتویٰ حاصل کرنے کے لیے مفتی صاحب سے براہِ راست رابطہ مستحسن ہے۔</small>
+                    </div>
+                    <a id="waMufti" href="#" target="_blank" class="btn btn-success btn-lg w-100 rounded-pill">
+                        <i class="fab fa-whatsapp me-2"></i> مفتی صاحب سے براہِ راست رابطہ کریں
                     </a>
                 </div>
             </div>
@@ -58,55 +57,55 @@
     </div>
 
     <script>
-        function processQuestion() {
-            const q = document.getElementById('questInput').value.toLowerCase();
-            const area = document.getElementById('responseArea');
-            const ans = document.getElementById('mainAnswer');
-            const ref = document.getElementById('refBook');
-            const wa = document.getElementById('waLink');
-
-            if (q === "") return alert("براہ کرم سوال لکھیں");
-
-            let a = "";
-            let r = "";
-
-            // اسمارٹ سرچ سسٹم (بہت سے مسائل کا احاطہ)
-            if (q.includes("وضو")) {
-                a = "وضو میں چار فرائض ہیں: چہرہ دھونا، کہنیوں سمیت ہاتھ دھونا، سر کا مسح اور ٹخنوں سمیت پاؤں دھونا۔";
-                r = "کتاب: ہدایہ (جلد اول)۔";
-            }
-            else if (q.includes("غسل")) {
-                a = "غسل کے تین فرائض ہیں: کلی کرنا، ناک میں پانی ڈالنا اور پورے بدن پر پانی بہانا۔";
-                r = "کتاب: بہشتی زیور (حصہ دوم)۔";
-            }
-            else if (q.includes("نماز") || q.includes("نماز کے فرائض")) {
-                a = "نماز میں تکبیر تحریمہ، قیام، قرات، رکوع، دونوں سجدے اور قعدہ اخیرہ بنیادی فرائض ہیں۔";
-                r = "فتاویٰ عالمگیری۔";
-            }
-            else if (q.includes("زکو") || q.includes("زکات")) {
-                a = "اگر کسی کے پاس ساڑھے باون تولہ چاندی یا ساڑھے سات تولہ سونا ہو اور اس پر سال گزر جائے تو 2.5% زکوٰۃ فرض ہے۔";
-                r = "کتاب: ہدایہ (باب الزکوٰۃ)۔";
-            }
-            else if (q.includes("روزہ") || q.includes("ٹوٹ")) {
-                a = "جان بوجھ کر کھانے پینے یا ہمبستری سے روزہ ٹوٹ جاتا ہے اور قضا و کفارہ لازم آتا ہے۔ بھول کر کھانے سے روزہ نہیں ٹوٹتا۔";
-                r = "فتاویٰ دارالعلوم دیوبند۔";
-            }
-            else if (q.includes("سجدہ سہو")) {
-                a = "واجباتِ نماز میں سے کوئی واجب بھولے سے چھوٹ جائے تو آخری قعدہ میں التحیات کے بعد ایک طرف سلام پھیر کر دو سجدے کرنا سجدہ سہو کہلاتا ہے۔";
-                r = "مراقی الفلاح۔";
-            }
-            else {
-                // Gemini کی طرح ڈائریکٹ میسج
-                a = "یہ ایک خاص شرعی مسئلہ معلوم ہوتا ہے۔ فقہ حنفی میں احتیاط کا تقاضا یہ ہے کہ ایسے مسائل میں براہِ راست مفتی صاحب سے مشورہ کیا جائے۔";
-                r = "تحقیق درکار (مفتی صاحب سے رابطہ کریں)۔";
-            }
-
-            ans.innerText = a;
-            ref.innerText = r;
-            wa.href = "https://wa.me/923261937058?text=السلام علیکم! ویب سائٹ سے سوال ہے: " + encodeURIComponent(q);
+        const megaLibrary = [
+            // طہارت و عبادات
+            { tags: ["وضو", "فرض", "ٹوٹنا"], ans: "وضو میں 4 فرائض ہیں: چہرہ، دونوں ہاتھ کہنیوں سمیت دھونا، چوتھائی سر کا مسح اور دونوں پاؤں ٹخنوں سمیت دھونا۔ ہوا نکلنے، خون بہنے یا گہری نیند سے وضو ٹوٹ جاتا ہے۔", ref: "ہدایہ: کتاب الطہارت" },
+            { tags: ["غسل", "جنابت", "حیض"], ans: "غسل میں 3 فرائض ہیں: کلی کرنا، ناک میں پانی ڈالنا اور پورے جسم پر پانی بہانا۔", ref: "فتاویٰ عالمگیری" },
+            { tags: ["نماز", "قصر", "سفر"], ans: "78 کلومیٹر کے سفر پر 4 رکعت والی فرض نماز کو 2 پڑھنا (قصر) واجب ہے۔ مسافر تب ہوگا جب اپنی بستی سے نکل جائے۔", ref: "ہدایہ: صلاۃ المسافر" },
+            { tags: ["سجدہ سہو", "بھول"], ans: "واجب بھول جانے پر قعدہ اخیرہ میں التحیات کے بعد ایک طرف سلام پھیر کر دو سجدے کرنا سجدہ سہو ہے۔", ref: "مراقی الفلاح" },
+            { tags: ["زکات", "زکوۃ", "مال"], ans: "ساڑھے باون تولہ چاندی یا ساڑھے سات تولہ سونے کی قیمت کے برابر مال پر سال گزرنے سے 2.5% زکوٰۃ واجب ہے۔", ref: "ہدایہ: کتاب الزکوٰۃ" },
+            { tags: ["روزہ", "کفارہ", "قضا"], ans: "جان بوجھ کر روزہ توڑنے پر قضا اور کفارہ (60 مسلسل روزے) لازم ہے۔ انجکشن سے روزہ نہیں ٹوٹتا بشرطیکہ وہ رگ یا پٹھے میں ہو۔", ref: "فتاویٰ دیوبند" },
             
-            area.style.display = 'block';
-            window.scrollTo(0, document.body.scrollHeight);
+            // حج و عمرہ
+            { tags: ["حج", "عمرہ", "احرام", "طواف"], ans: "حج کے 3 فرائض ہیں: احرام، وقوفِ عرفہ اور طوافِ زیارت۔ عمرہ میں احرام، طواف اور سعی بنیادی ارکان ہیں۔", ref: "ہدایہ: کتاب الحج" },
+            
+            // مالیاتی و جدید مسائل
+            { tags: ["سود", "بینک", "نفع"], ans: "سود قطعی حرام ہے۔ ہر وہ قرض جو نفع کھینچے سود ہے۔ بینک کا فکس نفع سودی ہونے کی وجہ سے ناجائز ہے۔", ref: "فتاویٰ عثمانی" },
+            { tags: ["ڈیجیٹل", "کرنسی", "بٹ کوائن"], ans: "ڈیجیٹل کرنسی کے بارے میں علماء کی آراء مختلف ہیں۔ احتیاط اس کے استعمال سے بچنے میں ہے جب تک کہ وہ قانونی طور پر مستند نہ ہو۔", ref: "جدید فقہی مسائل" },
+            { tags: ["بیمہ", "انشورنس"], ans: "مروجہ انشورنس میں سود اور قمار (جوا) شامل ہونے کی وجہ سے یہ شرعاً جائز نہیں ہے۔", ref: "فتاویٰ حقانیہ" },
+            
+            // خاندانی مسائل
+            { tags: ["نکاح", "گواہ", "ولایت"], ans: "نکاح کے لیے دو مسلمان مرد گواہوں کی موجودگی میں ایجاب و قبول شرط ہے۔", ref: "ہدایہ: کتاب النکاح" },
+            { tags: ["طلاق", "عدت", "خلع"], ans: "طلاق ایک ناپسندیدہ امر ہے۔ تین طلاقیں دینے سے مغلظہ واقع ہو جاتی ہے۔ عدت عام طور پر 3 حیض ہے۔", ref: "ہدایہ: کتاب الطلاق" },
+            { tags: ["وراثت", "میراث", "تقسیم"], ans: "میت کے ترکہ میں سب سے پہلے تجہیز و تکفین، پھر قرض کی ادائیگی، پھر وصیت (اگر ہو) اور پھر ورثاء میں تقسیم ہوگی۔", ref: "سراجی فی المیراث" },
+            
+            // معاشرتی مسائل
+            { tags: ["تصویر", "ویڈیو", "ٹی وی"], ans: "ذی روح کی تصویر بنانا ناجائز ہے، تاہم پاسپورٹ، شناختی کارڈ یا تعلیمی مقاصد کے لیے گنجائش موجود ہے۔", ref: "فتاویٰ محمودیہ" },
+            { tags: ["حقوق", "والدین", "پڑوسی"], ans: "والدین کی اطاعت واجب ہے بشرطیکہ وہ معصیت کا حکم نہ دیں۔ پڑوسیوں کے حقوق کی ادائیگی ایمان کا حصہ ہے۔", ref: "کتاب الادب" }
+        ];
+
+        function masterSearch() {
+            const input = document.getElementById('userInput').value.trim().toLowerCase();
+            const resArea = document.getElementById('resultBox');
+            const ansField = document.getElementById('ansDisplay');
+            const refField = document.getElementById('refDisplay');
+            const wa = document.getElementById('waMufti');
+
+            if (!input) return;
+
+            let match = megaLibrary.find(item => item.tags.some(tag => input.includes(tag)));
+
+            if (match) {
+                ansField.innerText = match.ans;
+                refField.innerText = "حوالہ: " + match.ref;
+            } else {
+                ansField.innerText = "آپ کا سوال موصول ہو گیا ہے۔ یہ ایک دقیق شرعی مسئلہ معلوم ہوتا ہے جس کی تفصیل کتبِ فتاویٰ میں دیکھنا ضروری ہے۔ مستند جواب کے لیے نیچے موجود واٹس ایپ بٹن پر کلک کریں۔";
+                refField.innerText = "تحقیق درکار";
+            }
+
+            wa.href = "https://wa.me/923261937058?text=السلام علیکم مفتی صاحب! ویب سائٹ سے سوال ہے: " + encodeURIComponent(input);
+            resArea.style.display = 'block';
+            window.scrollTo({ top: resArea.offsetTop - 50, behavior: 'smooth' });
         }
     </script>
 </body>
