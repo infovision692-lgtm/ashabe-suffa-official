@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعلیمِ دین - 365 روزہ کورس</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --main-green: #1b5e20; --accent-gold: #d4af37; }
+        body { background: #f4f7f4; font-family: 'Noto Sans Arabic', sans-serif; overflow-x: hidden; }
+        .urdu-font { font-family: 'Noto Nastaliq Urdu', serif; }
+
+        /* Navigation */
+        .navbar { background: var(--main-green) !important; border-bottom: 4px solid var(--accent-gold); }
+        
+        /* Modern Header */
+        .page-header { 
+            background: linear-gradient(rgba(27, 94, 32, 0.9), rgba(13, 59, 16, 0.9)), 
+                        url('https://www.transparenttextures.com/patterns/islamic-art.png');
+            color: white; padding: 100px 0; text-align: center;
+            clip-path: ellipse(150% 100% at 50% 0%);
+        }
+
+        /* Today's Special Card */
+        .today-card {
+            margin-top: -100px; background: white; border: none;
+            border-radius: 30px; box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            transition: 0.3s; position: relative; z-index: 10;
+        }
+        .today-card::before {
+            content: "آج کا سبق"; position: absolute; top: -15px; right: 50%;
+            transform: translateX(50%); background: var(--accent-gold);
+            color: white; padding: 5px 25px; border-radius: 50px; font-weight: bold;
+        }
+
+        /* Archive Style */
+        .archive-box { background: white; border-radius: 20px; border-right: 6px solid var(--main-green); transition: 0.3s; }
+        .archive-box:hover { background: #eef5ee; transform: scale(1.02); }
+
+        .share-pill {
+            background: #25d366; color: white; border: none;
+            padding: 12px 40px; border-radius: 50px; font-weight: bold;
+            box-shadow: 0 10px 20px rgba(37,211,102,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand urdu-font fs-2" href="index.html">اصحابِ صفہ</a>
+            <div class="ms-auto text-white urdu-font d-none d-md-block" id="liveClock"></div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1 class="urdu-font display-2">روزانہ کا منتخب مسئلہ</h1>
+            <p id="hijriDate" class="fs-4 text-warning urdu-font"></p>
+        </div>
+    </header>
+
+    <div class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="card today-card p-4 p-md-5 mb-5">
+                    <div class="text-center">
+                        <h2 id="todayTitle" class="urdu-font text-success display-4 mb-4"></h2>
+                        <div class="bg-light p-4 rounded-5 mb-4 shadow-sm italic">
+                            <p id="todayText" class="fs-2 text-dark" style="line-height: 2.2; text-align: center;"></p>
+                        </div>
+                        <p class="text-muted"><i class="fas fa-bookmark text-warning"></i> حوالہ: <span id="todayRef" class="fw-bold"></span></p>
+                        <button onclick="shareWhatsApp()" class="share-pill mt-3">
+                            <i class="fab fa-whatsapp me-2"></i> واٹس ایپ پر جاری کریں
+                        </button>
+                    </div>
+                </div>
+
+                <div id="archiveSection" style="display: none;">
+                    <h2 class="urdu-font text-center mb-4 pt-5"><i class="fas fa-history text-success"></i> گزشتہ اسباق</h2>
+                    <div id="archiveGrid" class="row g-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 365 MASAIL DATABASE ---
+        // Aap is list mein 365 masle add kar sakte hain
+        const masail365 = [
+            { t: "مسواک کی اہمیت", d: "مسواک کرنا سنتِ مؤکدہ ہے، یہ منہ کو صاف اور اللہ کو راضی کرنے والی چیز ہے۔", r: "بخاری شریف" },
+            { t: "وضو کی دعا", d: "وضو کے بعد آسمان کی طرف دیکھ کر کلمہ شہادت پڑھنا جنت کے دروازے کھولتا ہے۔", r: "مسلم شریف" },
+            { t: "کھانے کے آداب", d: "دائیں ہاتھ سے کھانا اور اپنے سامنے سے کھانا سنتِ نبوی ہے۔", r: "ترمذی" },
+            { t: "والدین کی خدمت", d: "ماں کے قدموں تلے جنت ہے اور باپ کی رضا میں اللہ کی رضا ہے۔", r: "بیہقی" },
+            { t: "پڑوسی کا حق", d: "وہ شخص کامل مومن نہیں جس کا پڑوسی اس کی اذیت سے محفوظ نہ ہو۔", r: "مسند احمد" }
+            // Yahan masail barhate jayen...
+        ];
+
+        function loadSmartSystem() {
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 0);
+            const diff = now - start;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const dayOfYear = Math.floor(diff / oneDay); // Aaj saal ka kaunsa din hai (1 to 365)
+
+            // Aaj ka Masla Index
+            const todayIdx = (dayOfYear - 1) % masail365.length;
+            const today = masail365[todayIdx];
+
+            // Display Today
+            document.getElementById('todayTitle').innerText = today.t;
+            document.getElementById('todayText').innerText = today.d;
+            document.getElementById('todayRef').innerText = today.r;
+            document.getElementById('hijriDate').innerText = now.toLocaleDateString('ur-PK', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+            // Logic for Archive (Sirf pichle masail dikhayega)
+            const archiveGrid = document.getElementById('archiveGrid');
+            let hasArchive = false;
+
+            // Aaj se pichle 5 dinon ke masail (ya jitne available hon)
+            for (let i = 1; i <= 5; i++) {
+                let prevIdx = todayIdx - i;
+                if (prevIdx >= 0) {
+                    hasArchive = true;
+                    const prev = masail365[prevIdx];
+                    archiveGrid.innerHTML += `
+                        <div class="col-md-6">
+                            <div class="archive-box p-4 shadow-sm h-100">
+                                <h4 class="urdu-font text-success">${prev.t}</h4>
+                                <p class="small text-muted mb-0">${prev.d.substring(0, 60)}...</p>
+                                <span class="badge bg-light text-dark mt-2 border">${prev.r}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            if (hasArchive) {
+                document.getElementById('archiveSection').style.display = 'block';
+            }
+        }
+
+        function shareWhatsApp() {
+            const t = document.getElementById('todayTitle').innerText;
+            const b = document.getElementById('todayText').innerText;
+            const url = window.location.href;
+            const msg = `*جامعہ اصحابِ صفہ - آج کا سبق*\n\n🌟 *${t}*\n${b}\n\nمزید اصلاحی مسائل کے لیے: ${url}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        window.onload = loadSmartSystem;
+    </script>
+</body>
+</html>
