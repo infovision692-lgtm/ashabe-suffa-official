@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قبلہ نما | دارالعلوم اصحاب صفہ</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --emerald: #004d40;
+            --deep: #001a14;
+            --gold: #d4af37;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            background-color: var(--deep);
+            color: var(--white);
+            min-height: 100vh;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        .orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 77, 64, 0.3) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            z-index: -1;
+            filter: blur(100px);
+        }
+
+        /* مینو ڈیزائن */
+        .custom-navbar .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: white !important;
+        }
+
+        .gold { color: var(--gold) !important; }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover { color: var(--gold) !important; }
+
+        /* قبلہ نما کنٹینر */
+        .compass-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%);
+            backdrop-filter: blur(25px);
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 40px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .compass-wrapper {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 40px auto;
+            border: 4px solid var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .compass-dial {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://cdn-icons-png.flaticon.com/512/149/149022.png');
+            background-size: cover;
+            opacity: 0.8;
+        }
+
+        .kaaba-pointer {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3.5rem;
+            color: var(--gold);
+            z-index: 10;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            transition: transform 0.1s ease-out;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--deep);
+            border: none;
+            padding: 12px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .btn-gold:hover {
+            transform: scale(1.05);
+            background: #f1c40f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orb"></div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar pt-4">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">اصحاب <span class="gold">صفہ</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-lg-4 align-items-center">
+                  <li class="nav-item"><a class="nav-link" href="index.html">ہوم پیج</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">تعارف</a></li>
+                    <li class="nav-item"><a class="nav-link" href="programs.html">پروگرامز</a></li>
+                     <li class="nav-item"><a class="nav-link active" href="qibla.html">قبلہ نما</a></li>
+                    <li class="nav-item"><a class="nav-link" href="fatwa.html" >دارالافتاء</a></li>
+                     <a class="nav-link" href="daily-masail.html">آج کا سبق</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="calculators.html">کیلکولیٹر میراث اور زکوٰۃ</a>
+</li>
+                    <li class="nav-item"><a class="nav-link active" href="support.html">تعاون کریں</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="compass-section">
+                    <h1 class="urdu-font gold-text mb-3">آن لائن قبلہ نما</h1>
+                    <p>درست سمت معلوم کرنے کے لیے اپنے موبائل کو ہموار سطح پر رکھیں۔</p>
+
+                    <div id="setup-box">
+                        <button class="btn-gold mt-4" onclick="startQibla()">لوکیشن اور سینسر آن کریں</button>
+                    </div>
+
+                    <div id="compass-box" style="display: none;">
+                        <div class="compass-wrapper">
+                            <div id="kaabaArrow" class="kaaba-pointer">
+                                <i class="fas fa-kaaba"></i>
+                            </div>
+                            <div id="compassDial" class="compass-dial"></div>
+                        </div>
+                        <div class="mt-4 p-3 rounded-pill bg-white bg-opacity-10 border border-gold">
+                            <span id="angleInfo">حساب لگایا جا رہا ہے...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let qiblaAngle = 0;
+
+        function startQibla() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(pos => {
+                    const lat = pos.coords.latitude;
+                    const lng = pos.coords.longitude;
+                    qiblaAngle = calcQibla(lat, lng);
+                    
+                    document.getElementById('setup-box').style.display = 'none';
+                    document.getElementById('compass-box').style.display = 'block';
+                    
+                    initSensors();
+                }, () => alert("براہ کرم لوکیشن کی اجازت دیں تاکہ قبلہ کا رخ معلوم ہو سکے۔"));
+            }
+        }
+
+        function calcQibla(lat, lng) {
+            const phiK = 21.4225 * Math.PI / 180;
+            const lambdaK = 39.8262 * Math.PI / 180;
+            const phi = lat * Math.PI / 180;
+            const lambda = lng * Math.PI / 180;
+            const y = Math.sin(lambdaK - lambda);
+            const x = Math.cos(phi) * Math.tan(phiK) - Math.sin(phi) * Math.cos(lambdaK - lambda);
+            return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+        }
+
+        function initSensors() {
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientationabsolute', (e) => {
+                    let heading = e.webkitCompassHeading || e.alpha;
+                    if (heading) {
+                        document.getElementById('compassDial').style.transform = `rotate(${-heading}deg)`;
+                        const pointerRotation = qiblaAngle - heading;
+                        document.getElementById('kaabaArrow').style.transform = `translateX(-50%) rotate(${pointerRotation}deg)`;
+                        document.getElementById('angleInfo').innerText = `قبلہ کا زاویہ: ${Math.round(qiblaAngle)}°`;
+                    }
+                }, true);
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
