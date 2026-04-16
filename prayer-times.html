@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اوقاتِ نماز | لائیو ڈیش بورڈ</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Plus+Jakarta+Sans:wght@500;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root { --gold: #d4af37; --deep: #001a14; --emerald: #004d40; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--deep); color: white; min-height: 100vh; overflow-x: hidden; }
+        .urdu { font-family: 'Noto Nastaliq Urdu', serif; }
+
+        .orb { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0, 77, 64, 0.2) 0%, transparent 70%); top: -200px; right: -200px; z-index: -1; filter: blur(100px); }
+
+        /* Search Bar Styling */
+        .search-container { max-width: 500px; margin: 0 auto 30px; position: relative; }
+        .search-input {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50px;
+            padding: 12px 25px;
+            color: white;
+            width: 100%;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .search-input:focus { background: rgba(255,255,255,0.1); border-color: var(--gold); outline: none; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+        .search-btn { position: absolute; left: 5px; top: 5px; background: var(--gold); border: none; border-radius: 50px; padding: 7px 20px; color: var(--deep); font-weight: bold; cursor: pointer; }
+
+        .prayer-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 25px;
+            text-align: center;
+            transition: 0.5s all ease;
+        }
+
+        .active-prayer {
+            border: 2px solid var(--gold);
+            background: rgba(212, 175, 55, 0.15);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+            transform: translateY(-10px);
+        }
+
+        .time-box { font-size: 2.2rem; font-weight: 800; color: var(--gold); }
+        .prayer-name { font-size: 1.4rem; margin-top: 5px; }
+        
+        #next-prayer-timer { font-size: clamp(3rem, 10vw, 5rem); font-weight: 800; text-shadow: 0 0 30px rgba(212, 175, 55, 0.4); }
+    </style>
+</head>
+<body>
+
+    <div class="orb"></div>
+
+    <div class="container py-5 text-center">
+        <h1 class="urdu display-4 mb-3" style="color: var(--gold);">اوقاتِ نماز</h1>
+        <div id="location-text" class="mb-4 opacity-75 urdu">اپنا شہر درج کریں یا لوکیشن آن کریں</div>
+
+        <div class="search-container">
+            <input type="text" id="city-input" class="search-input" placeholder="شہر کا نام انگلش میں لکھیں (مثلاً Peshawar)">
+            <button onclick="getTimesByCity()" class="search-btn">تلاش کریں</button>
+        </div>
+
+        <div class="mb-5">
+            <p class="urdu opacity-75">اگلی نماز میں باقی وقت</p>
+            <div id="next-prayer-timer">--:--:--</div>
+            <p id="next-prayer-name" class="urdu fs-3 text-white-50 mt-2"></p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-6 col-lg-2"><div class="prayer-card" id="Fajr"> <div class="time-box" id="f-time">--:--</div> <div class="prayer-name urdu">فجر</div> </div></div>
+            <div class="col-6 col-lg-2"><div class="prayer-card" id="Dhuhr"> <div class="time-box" id="d-time">--:--</div> <div class="prayer-name urdu">ظہر</div> </div></div>
+            <div class="col-6 col-lg-2"><div class="prayer-card" id="Asr"> <div class="time-box" id="a-time">--:--</div> <div class="prayer-name urdu">عصر</div> </div></div>
+            <div class="col-6 col-lg-2"><div class="prayer-card" id="Maghrib"> <div class="time-box" id="m-time">--:--</div> <div class="prayer-name urdu">مغرب</div> </div></div>
+            <div class="col-6 col-lg-2"><div class="prayer-card" id="Isha"> <div class="time-box" id="i-time">--:--</div> <div class="prayer-name urdu">عشاء</div> </div></div>
+        </div>
+    </div>
+
+    <script>
+        let timerInterval;
+
+        // 1. شہر کے نام سے ڈیٹا لانا
+        async function getTimesByCity() {
+            const city = document.getElementById('city-input').value;
+            if (!city) return alert("براہِ کرم شہر کا نام لکھیں");
+            fetchData(`https://api.aladhan.com/v1/timingsByCity?city=${city}&country=`);
+        }
+
+        // 2. آٹو لوکیشن سے ڈیٹا لانا
+        async function initApp() {
+            navigator.geolocation.getCurrentPosition(
+                (pos) => fetchData(`https://api.aladhan.com/v1/timings?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&method=1`),
+                () => { document.getElementById('location-text').innerText = "لوکیشن بند ہے۔ براہِ کرم اوپر شہر کا نام لکھیں۔"; }
+            );
+        }
+
+        async function fetchData(url) {
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                if(data.code === 200) {
+                    const timings = data.data.timings;
+                    updateUI(timings);
+                    if(timerInterval) clearInterval(timerInterval);
+                    timerInterval = setInterval(() => checkNextPrayer(timings), 1000);
+                    document.getElementById('location-text').innerText = `اوقات برائے: ${document.getElementById('city-input').value || 'آپ کا موجودہ مقام'}`;
+                }
+            } catch (err) { alert("نیٹ ورک کا مسئلہ!"); }
+        }
+
+        function updateUI(times) {
+            document.getElementById('f-time').innerText = formatTime(times.Fajr);
+            document.getElementById('d-time').innerText = formatTime(times.Dhuhr);
+            document.getElementById('a-time').innerText = formatTime(times.Asr);
+            document.getElementById('m-time').innerText = formatTime(times.Maghrib);
+            document.getElementById('i-time').innerText = formatTime(times.Isha);
+        }
+
+        function formatTime(t) {
+            let [h, m] = t.split(':');
+            h = parseInt(h);
+            return `${h % 12 || 12}:${m}`;
+        }
+
+        function checkNextPrayer(timings) {
+            const now = new Date();
+            const order = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+            let next = null;
+            let current = 'Isha';
+
+            for (let p of order) {
+                const [h, m] = timings[p].split(':');
+                const pTime = new Date(); pTime.setHours(h, m, 0);
+                if (pTime > now) { next = { name: p, time: pTime }; break; }
+                current = p;
+            }
+
+            if (!next) {
+                const [h, m] = timings.Fajr.split(':');
+                const pTime = new Date(); pTime.setDate(pTime.getDate() + 1); pTime.setHours(h, m, 0);
+                next = { name: 'Fajr', time: pTime };
+            }
+
+            document.querySelectorAll('.prayer-card').forEach(c => c.classList.remove('active-prayer'));
+            document.getElementById(current).classList.add('active-prayer');
+
+            const diff = next.time - now;
+            const hh = Math.floor(diff / 3600000);
+            const mm = Math.floor((diff % 3600000) / 60000);
+            const ss = Math.floor((diff % 60000) / 1000);
+            document.getElementById('next-prayer-timer').innerText = `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
+            
+            const names = { Fajr: 'فجر', Dhuhr: 'ظہر', Asr: 'عصر', Maghrib: 'مغرب', Isha: 'عشاء' };
+            document.getElementById('next-prayer-name').innerText = `اگلی نماز: ${names[next.name]}`;
+        }
+
+        initApp();
+    </script>
+</body>
+</html>
