@@ -111,6 +111,7 @@
                     <li class="nav-item"><a class="nav-link active" href="support.html">تعاون کریں</a></li>
                 </ul>
             </div>
+            
         </div>
     </nav>
 
@@ -127,6 +128,80 @@
             <div class="col-md-10 text-center p-5 shadow-sm bg-white rounded-4">
                 <h3 class="mb-4 text-success section-title">ہمارا مقصد</h3>
                 <p class="fs-4 text-muted" style="line-height: 1.8;">دارالعلوم اصحابِ صفہ کا مقصد ایسی نسل تیار کرنا ہے جو دینی علوم کے ساتھ ساتھ عصری تقاضوں سے بھی ہم آہنگ ہو۔ ہم یہاں اخلاقی تربیت اور علمی کمال پر توجہ دیتے ہیں۔</p>
+           <div class="col-md-6 col-lg-4 mb-4">
+    <div class="prayer-shortcut-card">
+        <div class="card-overlay"></div>
+        <div class="card-content text-center p-4">
+            <div class="icon-circle mb-3">
+                <i class="fas fa-clock"></i>
+            </div>
+            <h3 class="urdu-font mb-2" style="color: #d4af37;">اوقاتِ نماز</h3>
+            <p class="text-white-50 small mb-4">اپنے شہر کے لائیو اوقات اور اگلی نماز کا کاؤنٹ ڈاؤن دیکھیں</p>
+            
+            <a href="prayer-times.html" class="btn-prayer-link urdu-font">
+                ابھی چیک کریں <i class="fas fa-arrow-left ms-2"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .prayer-shortcut-card {
+        background: linear-gradient(135deg, #1b5e20 0%, #0d3b10 100%);
+        border-radius: 25px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        transition: all 0.4s ease;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    .prayer-shortcut-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+        border-color: #d4af37;
+    }
+
+    .icon-circle {
+        width: 70px;
+        height: 70px;
+        background: rgba(212, 175, 55, 0.1);
+        border: 2px solid #d4af37;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        font-size: 30px;
+        color: #d4af37;
+    }
+
+    .btn-prayer-link {
+        display: inline-block;
+        background: #d4af37;
+        color: #1b5e20 !important;
+        padding: 10px 25px;
+        border-radius: 50px;
+        text-decoration: none !important;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .btn-prayer-link:hover {
+        background: white;
+        transform: scale(1.05);
+    }
+
+    .card-overlay {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+        pointer-events: none;
+    }
+</style>
             </div>
         </div>
     </main>
