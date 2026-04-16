@@ -31,6 +31,15 @@
         .btn-whatsapp { background-color: #25d366; color: white; font-weight: bold; border-radius: 10px; padding: 12px; font-size: 1.1rem; border: none; transition: 0.3s; }
         .btn-whatsapp:hover { background-color: #128c7e; transform: scale(1.02); color: white; }
 
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: #1b5e20;
+                padding: 20px;
+                border-radius: 0 0 15px 15px;
+            }
+            .nav-link { margin: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        }
+
         @media (max-width: 768px) {
             .hero-section h1 { font-size: 2rem; }
             .hero-section p { font-size: 1.1rem; }
@@ -132,13 +141,13 @@
         <p>© 2026 دارالعلوم اصحابِ صفہ - شبقدر</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        // Existing Search Data
         const megaLibrary = [
             { tags: ["وضو", "فرض", "ٹوٹنا"], ans: "وضو میں 4 فرائض ہیں: چہرہ، دونوں ہاتھ کہنیوں سمیت دھونا، چوتھائی سر کا مسح اور دونوں پاؤں ٹخنوں سمیت دھونا۔ ہوا نکلنے، خون بہنے یا گہری نیند سے وضو ٹوٹ جاتا ہے۔", ref: "ہدایہ: کتاب الطہارت" },
             { tags: ["زکات", "زکوۃ", "مال"], ans: "ساڑھے باون تولہ چاندی یا ساڑھے سات تولہ سونے کی قیمت کے برابر مال پر سال گزرنے سے 2.5% زکوٰۃ واجب ہے۔", ref: "ہدایہ: کتاب الزکوٰۃ" },
             { tags: ["نماز", "قصر", "سفر"], ans: "78 کلومیٹر کے سفر پر 4 رکعت والی فرض نماز کو 2 پڑھنا (قصر) واجب ہے۔", ref: "ہدایہ: صلاۃ المسافر" }
-            // ... more tags can be added
         ];
 
         function masterSearch() {
@@ -156,7 +165,6 @@
             }
         }
 
-        // New Function for Detailed WhatsApp Form
         function sendDetailedWA() {
             const num = "923059927523";
             const name = document.getElementById('fname').value;
