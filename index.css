@@ -46,13 +46,20 @@ body {
 
 /* ہیرو سیکشن */
 .hero {
-    height: 70vh;
-    min-height: 400px;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/hero-bg.jpg');
+    background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('images/hero-bg.jpg');
+    background-color: var(--mid-green);
     background-size: cover;
     background-position: center;
+    min-height: 80vh; /* تھوڑا سائز بڑا کیا */
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-bottom: 8px solid var(--gold);
+    padding-top: 100px; /* یہ لائن نیو بار کے نیچے جگہ بنائے گی */
 }
+
 
 .hero-content h2 {
     color: #d4af37;
